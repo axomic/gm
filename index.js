@@ -35,12 +35,17 @@ function gm (source, height, color) {
   this._outputFormat = null;
   this._subCommand = 'convert';
 
+
+
   if (source instanceof Stream) {
     this.sourceStream = source;
     source = height || 'unknown.jpg';
   } else if (Buffer.isBuffer(source)) {
     this.sourceBuffer = source;
     source = height || 'unknown.jpg';
+  } else if (source.input && source.composite) {
+    this.sourceStream = source.input;
+    this.compositeStream = source.composite;
   } else if (height) {
     // new images
     width = source;
@@ -73,6 +78,9 @@ function gm (source, height, color) {
 
     var inputFromStdin = this.sourceStream || this.sourceBuffer;
     var ret = inputFromStdin ? '-' : this.source;
+
+        
+
 
     if (ret && this.sourceFrames) ret += this.sourceFrames;
 
