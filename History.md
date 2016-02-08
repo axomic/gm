@@ -1,3 +1,73 @@
+1.21.1 / 2015-10-26
+
+* fixed: Fixed #465 hard coded gm binary, also fixed issues with compare and fixed tests so they will fail on subsequent runs when they should do [rwky](https://github.com/rwky)
+
+1.21.0 / 2015-10-26 **contains security fix**
+
+* fixed: gm.compare fails to escape arguments properly (Reported by Brendan Scarvell) [rwky](https://github.com/rwky)
+
+1.20.0 / 2015-09-23
+
+* changed: Reverted "Add format inference from filename for buffers/streams" due to errors #448
+
+1.19.0 / 2015-09-16
+
+* changed: Added error to notify about image magick not supporting minify [encima](https://github.com/encima)
+* changed: Refactored orientation getter to use faster identify call [lbeschastny](https://github.com/lbeschastny)
+* added: resizeExact function [DanMMX](https://github.com/DanMMX)
+* added: thumbExact function [DanMMX](https://github.com/DanMMX)
+* added: Add format inference from filename for buffers/streams [adurrive](https://github.com/adurrive)
+* fixed: Hex values when passed to compare aren't quoted automatically [DanMMX](https://github.com/DanMMX)
+* fixed: identify returning last frame size instead of the larges on animated gifs [preynal](https://github.com/preynal)
+* docs: Updated docs [laurilehmijoki](https://github.com/laurilehmijoki)
+
+1.18.1 / 2015-05-18
+
+* changed: Added io.js support [rwky](https://github.com/rwky)
+
+1.18.0 / 2015-05-18
+
+* changed: Removed support for node 0.8 and added support for 0.12 [rwky](https://github.com/rwky)
+* changed: Listen to stdin error event for spawn errors [kapouer](https://github.com/kapouer)
+* changed: Improved error handling when gm isn't installed [FreshXOpenSource](https://github.com/FreshXOpenSource)
+* changed: Allow append method to use an array of arguments [emohacker](https://github.com/emohacker)
+* changed: appPath option now specifies full path to gm binary John Borkowski
+* changed: Ignore warning messages for identify [asrail](https://github.com/asrail)
+* added: Montage method [donaldpcook](https://github.com/donaldpcook)
+* added: Progressive option to thumb [mohebifar](https://github.com/mohebifar)
+* added: Native gm auto-orient for use with gm >= 1.3.18 [bog](https://github.com/bog)
+* added: Timeout support by passing the timeout option in milliseconds [marcbachmann](https://github.com/marcbachmann)
+* fixed: density when using ImageMagick [syzer](https://github.com/syzer)
+* fixed: resize behaviour for falsy values [adius](https://github.com/adius)
+
+
+1.17.0 / 2014-10-28
+==================
+
+ * changed: extended compare callback also returns the file names #297 [mastix](https://github.com/mastix)
+ * changed: pass spawn crash to callback #306 [medikoo](https://github.com/medikoo)
+ * changed: geometry supports arbitary string as first argument #330 [jdiez17](https://github.com/jdiez17)
+ * added: support for repage+ option #275 [desigens](https://github.com/desigens)
+ * added: added the dissolve command #300 [microadm](https://github.com/microadam)
+ * added: composite method #332 [jdiez17](https://github.com/jdiez17)
+ * fixed: cannot set tolerance to 0 #302 [rwky](https://github.com/rwky)
+ * fixed: handle empty buffers #330 [alcidesv](https://github.com/alcidesv)
+
+1.16.0 / 2014-05-09
+==================
+
+ * fixed; dropped "+" when 0 passed as vertical roll amt #267 [dwtkns](https://github.com/dwtkns)
+ * added; highlight-style support #272 [fdecampredon](https://github.com/fdecampredon)
+
+1.15.0 / 2014-05-03
+===================
+
+ * changed; gm.compare logic to always run the mse comparison as expected #258 [Vokkim](https://github.com/Vokkim)
+ * added; `tolerance` to gm.compare options object #258 [Vokkim](https://github.com/Vokkim)
+ * added; option to set ImageMagick application path explicitly #250 (akreitals)
+ * fixed; gm.compare: support values like 9.51582e-05 #260 [normanrz](https://github.com/normanrz)
+ * README: add call for maintainers
+
 1.14.2 / 2013-12-24
 ===================
 

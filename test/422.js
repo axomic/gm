@@ -18,7 +18,7 @@ module.exports = function (gm, dir, finish, GM) {
         if (!same) return finish(new Error('Compare should be the same!'));
 
         var options = {
-          highlightColor: 'yellow',
+          highlightColor: '#fff',
           highlightStyle: 'XOR',
           file: dir + '/diff.png',
           tolerance: 0.001
@@ -29,7 +29,9 @@ module.exports = function (gm, dir, finish, GM) {
           if (err) return finish(err);
 
           fs.exists(options.file, function(exists) {
-            if (exists) finish();
+            if (exists) {
+		fs.unlink(options.file, finish);
+		}
             else finish(new Error('Diff file does not exist.'));
           });
         });

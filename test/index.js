@@ -8,12 +8,14 @@ var assert = require('assert');
 var gleak = require('gleak')();
 var fs = require('fs');
 
+gleak.whitelist.push(clearImmediate);
+gleak.whitelist.push(setImmediate);
+
 var only = process.argv.slice(2);
 gm.integration = !! ~process.argv.indexOf('--integration');
 if (gm.integration) only.shift();
 
 var files = fs.readdirSync(__dirname).filter(filter);
-var pending, total = pending = files.length * 2;
 
 function filter (file) {
   if (!/\.js$/.test(file)) return false;
@@ -38,18 +40,9 @@ function finish (filename) {
       throw err;
     }
 
-    --pending;
     process.stdout.write('\033[2K');
     process.stdout.write('\033[0G');
-    process.stdout.write('pending ' + pending);
-    if (pending) return;
-
-    process.stdout.write('\033[?25h');
-    process.stdout.write('\033[2K');
-    process.stdout.write('\033[0G');
-    var leaks = gleak.detect();
-    assert.equal(0, leaks.length, "global leaks detected: " + leaks);
-    console.error("\n\u001B[32mAll tests passed\u001B[0m");
+    process.stdout.write('pending ' + (q.length()+q.running()));
   }
 }
 
@@ -63,7 +56,17 @@ var q = async.queue(function (task, callback) {
     finish(filename)(err);
     callback();
   }, gm, im);
-}, 5);
+}, 1);
+
+q.drain = function(){
+
+process.stdout.write('\033[?25h');
+    process.stdout.write('\033[2K');
+    process.stdout.write('\033[0G');
+    var leaks = gleak.detect();
+    assert.equal(0, leaks.length, "global leaks detected: " + leaks);
+    console.error("\n\u001B[32mAll tests passed\u001B[0m");
+};
 
 files = files.map(function (file) {
   return __dirname + '/' + file
